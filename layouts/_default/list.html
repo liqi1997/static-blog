@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <title>李奇的静态网站</title>
+
+    <style>
+        .item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px dashed #999;
+        }
+
+        .item:hover {
+            text-decoration: none;
+        }
+
+        .item .title {
+            font-size: 16px;
+        }
+
+        .item .time {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .pagination {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page-item a {
+            height: 32px;
+            width: 32px;
+            border: 1px solid #d0d0d0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page-item {
+            margin-right: 8px;
+        }
+
+        .page-item:last-child {
+            margin-right: 0;
+        }
+
+        .active {
+            background-color: #0963b8;
+        }
+
+        .active a {
+            color: #fff;
+        }
+
+        .disabled {
+            cursor: not-allowed;
+        }
+
+        .disabled a {
+            pointer-events: none;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+    {{ partial "header.html" }}
+
+    <div class="body">
+        <div class="container">
+
+            {{range .Paginator.Pages}}
+            <a target="_blank" href="{{ .Permalink }}" class="item">
+                <div class="title">{{ .Title }}</div>
+                <div class="time">更新时间：{{ .Lastmod.Format "2006-01-02 15:04" }}</div>
+            </a>
+            {{ end }}
+            {{ template "_internal/pagination.html" . }}
+
+
+
+
+        </div>
+
+    </div>
+
+    {{ partial "footer.html"}}
+
+</body>
+
+</html>
